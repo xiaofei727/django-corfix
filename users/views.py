@@ -13,9 +13,9 @@ def signin(request):
         })
 
 def dashboard(request):
-    return render(request, 'users/dashboard.html', {
+    return render(request, 'projects/dashboard.html', {
         })
 
 def projects(request):
-    return render(request, 'users/projects.html', {
+    return render(request, 'projects/projects.html', {
         })
