@@ -78,7 +78,7 @@
                                     <div class="kt-login__head">
                                         <h3 class="kt-login__title">Sign In To Admin</h3>
                                     </div>
-                                    <form class="kt-form" action="">
+                                    <form class="kt-form" action="/signin_post" method="POST">
                                         <div class="input-group">
                                             <input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
                                         </div>
@@ -106,7 +106,7 @@
                                         <h3 class="kt-login__title">Sign Up</h3>
                                         <div class="kt-login__desc">Enter your details to create your account:</div>
                                     </div>
-                                    <form class="kt-login__form kt-form" action="">
+                                    <form class="kt-login__form kt-form" action="/signup_post" method="POST">
                                         <div class="input-group">
                                             <input class="form-control" type="text" placeholder="Fullname" name="fullname">
                                         </div>
@@ -139,7 +139,7 @@
                                         <h3 class="kt-login__title">Forgotten Password ?</h3>
                                         <div class="kt-login__desc">Enter your email to reset your password:</div>
                                     </div>
-                                    <form class="kt-form" action="">
+                                    <form class="kt-form" action="/forgetpwd_post" method="POST">
                                         <div class="input-group">
                                             <input class="form-control" type="text" placeholder="Email" name="email" id="kt_email" autocomplete="off">
                                         </div>
@@ -197,7 +197,7 @@
             <!--end::Global Theme Bundle -->
     
             <!--begin::Page Scripts(used by this page) -->
-            <script src="{% get_static_prefix %}assets/app/custom/login/login-general.js" type="text/javascript"></script>
+            <script src="{% get_static_prefix %}js/login-general.js" type="text/javascript"></script>
     
             <!--end::Page Scripts -->
     
