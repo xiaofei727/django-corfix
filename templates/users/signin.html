@@ -27,7 +27,7 @@
 		<!--end::Fonts -->
 
 		<!--begin::Page Custom Styles(used by this page) -->
-		<link href="{% get_static_prefix %}assets/app/custom/login/login-v2.default.css" rel="stylesheet" type="text/css" />
+		<link href="{% get_static_prefix %}css/login.css" rel="stylesheet" type="text/css" />
 
 		<!--end::Page Custom Styles -->
 
@@ -79,6 +79,7 @@
                                         <h3 class="kt-login__title">Sign In To Admin</h3>
                                     </div>
                                     <form class="kt-form" action="/signin_post" method="POST">
+                                        {% csrf_token %}
                                         <div class="input-group">
                                             <input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
                                         </div>
@@ -107,17 +108,18 @@
                                         <div class="kt-login__desc">Enter your details to create your account:</div>
                                     </div>
                                     <form class="kt-login__form kt-form" action="/signup_post" method="POST">
+                                        {% csrf_token %}
                                         <div class="input-group">
-                                            <input class="form-control" type="text" placeholder="Fullname" name="fullname">
+                                            <input class="form-control" type="text" placeholder="Username" name="username" value="a">
                                         </div>
                                         <div class="input-group">
-                                            <input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
+                                            <input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off" value="a@a.com">
                                         </div>
                                         <div class="input-group">
-                                            <input class="form-control" type="password" placeholder="Password" name="password">
+                                            <input class="form-control" type="password" placeholder="Password" name="password" value="a">
                                         </div>
                                         <div class="input-group">
-                                            <input class="form-control" type="password" placeholder="Confirm Password" name="rpassword">
+                                            <input class="form-control" type="password" placeholder="Confirm Password" name="rpassword" value="a">
                                         </div>
                                         <div class="row kt-login__extra">
                                             <div class="col kt-align-left">
@@ -140,6 +142,7 @@
                                         <div class="kt-login__desc">Enter your email to reset your password:</div>
                                     </div>
                                     <form class="kt-form" action="/forgetpwd_post" method="POST">
+                                        {% csrf_token %}
                                         <div class="input-group">
                                             <input class="form-control" type="text" placeholder="Email" name="email" id="kt_email" autocomplete="off">
                                         </div>
