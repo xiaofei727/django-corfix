@@ -7,6 +7,15 @@ def index(request):
             'error_message': "You didn't select a choice.",
         })
 
-def main(request):
-    return render(request, 'main.html', {
+def signin(request):
+    return render(request, 'users/signin.html', {
+            'error_message': "You didn't select a choice.",
+        })
+
+def dashboard(request):
+    return render(request, 'users/dashboard.html', {
+        })
+
+def projects(request):
+    return render(request, 'users/projects.html', {
         })
