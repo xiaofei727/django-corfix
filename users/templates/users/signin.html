@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/users.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{ error_message }}</h1>
+    Sign In
+    <a href="{% url 'index'  %}">Index</a>
+
+{% endblock %}
