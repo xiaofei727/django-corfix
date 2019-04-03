@@ -95,12 +95,21 @@ var KTLoginGeneral = function() {
             form.ajaxSubmit({
                 url: 'signin_post',
                 success: function(response, status, xhr, $form) {
-                	// similate 2s delay
-                	setTimeout(function() {
-	                    btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
-	                    showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
-                    }, 2000);
-                }
+                    if(!response.errors)
+                    {
+                        window.location.href = "/dashboard";
+                    }
+                    else{
+                        btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
+                        showErrorMsg(form, 'danger', response.errors);
+                    }
+                    
+                    // similate 2s delay
+                	// setTimeout(function() {
+	                //     btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
+	                //     showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
+                    // }, 2000);
+                }   
             });
         });
     }
@@ -142,20 +151,41 @@ var KTLoginGeneral = function() {
             form.ajaxSubmit({
                 url: 'signup_post',
                 success: function(response, status, xhr, $form) {
-                	// similate 2s delay
-                	setTimeout(function() {
-	                    btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
+                    if(!response.errors)
+                    {
+                        window.location.href = response.userid + "/company_profile";
+                    }
+                    else{
+                        btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
 	                    form.clearForm();
-	                    form.validate().resetForm();
+                        form.validate().resetForm();
+                        console.log(response);
+                        let str = ""
+                        let obj = response.errors;
+                        for (var prop in obj) {
+                            // skip loop if the property is from prototype
+                            if(!obj.hasOwnProperty(prop)) continue;
+                            str += obj[prop];
+                            str += "<br/>";
+                        }
+                        console.log(str);
+                        showErrorMsg(form, 'danger', str);
+                    }
+                    
+                	// similate 2s delay
+                	// setTimeout(function() {
+	                //     btn.removeClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', false);
+	                //     form.clearForm();
+	                //     form.validate().resetForm();
 
-	                    // display signup form
-	                    displaySignInForm();
-	                    var signInForm = login.find('.kt-login__signin form');
-	                    signInForm.clearForm();
-	                    signInForm.validate().resetForm();
+	                //     // display signup form
+	                //     displaySignInForm();
+	                //     var signInForm = login.find('.kt-login__signin form');
+	                //     signInForm.clearForm();
+	                //     signInForm.validate().resetForm();
 
-	                    showErrorMsg(signInForm, 'success', 'Thank you. To complete your registration please check your email.');
-	                }, 2000);
+	                //     showErrorMsg(signInForm, 'success', 'Thank you. To complete your registration please check your email.');
+	                // }, 2000);
                 }
             });
         });

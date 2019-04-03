@@ -25,7 +25,7 @@ SECRET_KEY = '#^8s-w1ixnavhmw#9wr9&-a@q4&h@l41m5r%i=i0iurwbl7v=_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['af581091.ngrok.io', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corfix.middleware.AuthMiddleware',
 ]
 
 ROOT_URLCONF = 'corfix.urls'
