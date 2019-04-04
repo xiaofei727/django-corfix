@@ -72,7 +72,6 @@ def signin_post(request):
 def company_profile(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     print(client)
-    return HttpResponse("Company Profile Page")
     return render(request, 'users/company_profile.html', {
             'client': client,
         })
