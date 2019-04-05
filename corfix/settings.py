@@ -31,14 +31,16 @@ ALLOWED_HOSTS = ['af581091.ngrok.io', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,9 +50,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corfix.middleware.AuthMiddleware',
-]
 
+]
+    # 'corfix.middleware.AuthMiddleware',
 ROOT_URLCONF = 'corfix.urls'
 
 TEMPLATES = [
