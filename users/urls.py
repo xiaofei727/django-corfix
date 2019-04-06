@@ -12,5 +12,6 @@ urlpatterns = [
     path('projects', views.projects, name='projects'),
     path('new_project', views.new_project, name='new_project'),
     
-    path('<int:client_id>/company_profile', views.company_profile, name='company_profile'),
+    path('<int:user_id>/company_profile', views.company_profile, name='company_profile'),
+    path('<int:user_id>/company_profile_save', views.company_profile_save, name='company_profile_save'),
 ]

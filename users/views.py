@@ -60,13 +60,6 @@ def signin_post(request):
             return JsonResponse({'errors': 'Invalid Username or Password' })
     return JsonResponse({'errors': 'GET method' })
 
-@login_required(login_url='/signin')
-def company_profile(request, client_id):
-    client = get_object_or_404(CustomUser, pk=client_id)
-    print(client)
-    return render(request, 'users/company_profile.html', {
-            'client': client,
-        })
 
 def logout_view(request):
     print(request.user)
@@ -77,6 +70,7 @@ class SignupForm(forms.Form):
     username = forms.CharField(max_length=200)
     email = forms.CharField(max_length=200)
     password = forms.CharField(max_length=128)
+    confirm_password = forms.CharField(max_length=128)
     company = forms.CharField(max_length=200)
     
     def clean_email(self):
@@ -91,6 +85,17 @@ class SignupForm(forms.Form):
               raise forms.ValidationError("Username already exists")
           return data
 
+    def clean(self):
+        cleaned_data= super(SignupForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            raise forms.ValidationError("Password does not match")
+        return cleaned_data
+
+
+        
     def save(self, request):
         new_user = CustomUser(username=self.cleaned_data['username'])
         new_user.email = self.cleaned_data['email']
@@ -102,8 +107,8 @@ class SignupForm(forms.Form):
         try:
             client = Client(user=new_user, company=self.cleaned_data['company'])
             client.save()
-        except Exception(e):
-            print(e)
+        except Exception:
+            print( 'Client create Error')
             return new_user
         return new_user
 
@@ -138,3 +143,34 @@ def projects(request):
 def new_project(request):
     return render(request, 'projects/new_project.html', {
         })
+
+@login_required(login_url='/signin')
+def company_profile(request, user_id):
+    client = get_object_or_404(CustomUser, pk=user_id)
+    print(client)
+    return render(request, 'users/company_profile.html', {
+            'client': client,
+        })
+
+@login_required(login_url='/signin')
+def company_profile_save(request, user_id):
+    user = get_object_or_404(CustomUser, pk=user_id)
+    user.client.company = request.POST['company']
+    user.client.address = request.POST['address']
+    user.client.address2 = request.POST['address2']
+    user.client.country = request.POST['country']
+    user.client.region = request.POST['region']
+    user.client.city = request.POST['city']
+    user.client.postal_code = request.POST['postal_code']
+    # user.client.main_phone = request.POST['main_phone']
+    user.client.main_phone_extension = request.POST['main_phone_extension']
+    # user.client.alt_phone = request.POST['alt_phone']
+    user.client.alt_phone_extension = request.POST['alt_phone_extension']
+    # user.client.fax = request.POST['fax']
+    user.client.business_email = request.POST['business_email']
+    user.client.industry = request.POST['industry']
+
+    user.client.save()
+    return HttpResponse(request.POST['company'])
+
+    
